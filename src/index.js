@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 
 function AddPersonForm(props){
-  const [person, setPerson] = useState("");
+  const [person, setPerson] = useState('');
 
   function handleChange(e){
     setPerson(e.target.value);
@@ -40,6 +40,7 @@ function ContactManager(props){
   const [contacts, setContacts] = useState(props.data);
 
   function addPerson(name){
+    console.log('"addPerson" function triggered!');
     setContacts([...contacts, name]);
   }
 
