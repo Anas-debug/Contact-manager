@@ -1,11 +1,13 @@
 import React,{useState} from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+// import './index.css';
 // import App from './App';
+import ListWithAddItem from './components/ListWithAddItem';
+import './App.css';
 import reportWebVitals from './reportWebVitals';
 
 
-function AddPersonForm(props){
+function AddPersonForm(props) {
   const [person, setPerson] = useState('');
 
   function handleChange(e){
@@ -24,14 +26,16 @@ function AddPersonForm(props){
         placeholder="New Contact Name"
         onChange={handleChange}
         value = {person}/>
-        <button type='submit'>Add New Contact</button>
+        <button type="submit">Add New Contact</button>
     </form>
   );
 }
 
 function PeopleList(props){
   const arr = props.data;
-  const listItems = arr.map((value, index) => <li key={index}>{ value }</li>);
+  const listItems = arr.map((value, index) => {
+  return <li display= "block-inline" key={index}>{value}</li>
+  });
 
   return(<ul>{listItems}</ul>);
 }
@@ -39,13 +43,13 @@ function PeopleList(props){
 function ContactManager(props){
   const [contacts, setContacts] = useState(props.data);
 
-  function addPerson(name){
-    console.log('"addPerson" function triggered!');
+  function addPerson(name) {
+    // console.log('"addPerson" function triggered!');
     setContacts([...contacts, name]);
   }
 
   return(
-    <div>
+    <div align="center">
       <AddPersonForm handleChange={addPerson}/>
       <PeopleList data={contacts} />
     </div>
@@ -57,7 +61,8 @@ const contacts = ["John Fontain", "Bilal Philips", "Yusuf Estes"];
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ContactManager data ={contacts}/>
+    {/* <ContactManager data ={contacts}/> */}
+    <ListWithAddItem />
   </React.StrictMode>
 );
 
