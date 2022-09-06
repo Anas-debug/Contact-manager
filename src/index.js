@@ -2,67 +2,63 @@ import React,{useState} from 'react';
 import ReactDOM from 'react-dom/client';
 // import './index.css';
 // import App from './App';
-import ListWithAddItem from './components/ListWithAddItem';
+// import ListWithAddItem from './components/ListWithAddItem';
 import './App.css';
 import reportWebVitals from './reportWebVitals';
 
 
 function AddPersonForm(props) {
-  const [person, setPerson] = useState('');
-
-  function handleChange(e){
+  const [ person, setPerson ] = useState('');
+    
+  function handleChange(e) {
     setPerson(e.target.value);
   }
-
-  function handleSubmit(e){
+    
+  function handleSubmit(e) {
     props.handleSubmit(person);
     setPerson('');
     e.preventDefault();
   }
-
   return (
-    <form onSubmit ={handleSubmit}>
-      <input type="text"
-        placeholder="New Contact Name"
-        onChange={handleChange}
-        value = {person}/>
-        <button type="submit">Add New Contact</button>
+    <form onSubmit={handleSubmit}>
+      <input type="text" 
+        placeholder="Add new contact" 
+        onChange={handleChange} 
+        value={person} />
+      <button type="submit">Add</button>
     </form>
   );
 }
 
-function PeopleList(props){
+function PeopleList(props) {
   const arr = props.data;
-  const listItems = arr.map((value, index) => {
-  return <li display= "block-inline" key={index}>{value}</li>
-  });
-
-  return(<ul>{listItems}</ul>);
+  const listItems = arr.map((val, index) =>
+    <li key={index}>{val}</li>
+  );
+  return <ul>{listItems}</ul>;
 }
 
-function ContactManager(props){
+function ContactManager(props) {
   const [contacts, setContacts] = useState(props.data);
 
   function addPerson(name) {
-    // console.log('"addPerson" function triggered!');
     setContacts([...contacts, name]);
   }
 
-  return(
-    <div align="center">
-      <AddPersonForm handleChange={addPerson}/>
+  return (
+    <div>
+      <AddPersonForm handleSubmit={addPerson} />
       <PeopleList data={contacts} />
     </div>
   );
 }
-
-const contacts = ["John Fontain", "Bilal Philips", "Yusuf Estes"]; 
+const contacts = ["James Smith", "Thomas Anderson", "Bruce Wayne"];
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <ContactManager data ={contacts}/> */}
-    <ListWithAddItem />
+    <ContactManager data ={contacts}/>
+    {/* <ListWithAddItem /> */}
   </React.StrictMode>
 );
 
