@@ -21,9 +21,9 @@ function AddPersonForm(props){
   return (
     <form onSubmit ={handleSubmit}>
       <input type="text"
-        placeholder='New Contact Name'
+        placeholder="New Contact Name"
         onChange={handleChange}
-        value ="person"/>
+        value = {person}/>
         <button type='submit'>Add New Contact</button>
     </form>
   );
